@@ -1,0 +1,1 @@
+This library is going to be the best Minecraft Vector3 utility library to ever grace the internet.
