@@ -1,11 +1,11 @@
 {
   "name": "@madlad3718/minecraft-vec3-lib",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A library of advanced vector 3 operations for use within the Minecraft scripting API.",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "type": "module",
-  "types": "./dist/minecraft-vec3-lib.d.ts",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsup"
