@@ -71,11 +71,6 @@ export namespace Vec3 {
      */
     export function from(x: number): Vector3;
     /**
-     * Returns the corresponding {@link Vector3} to the given direction.
-     * @param x The value to set each vector component to.
-     */
-    export function from(d: Direction): Vector3;
-    /**
      * Constructs a {@link Vector3} from the given values.
      * @param x The x value of the vector.
      * @param y The y value of the vector.
@@ -87,6 +82,11 @@ export namespace Vec3 {
      * @param x An array of 3 numbers corresponding to vector components.
      */
     export function from(x: number[]): Vector3;
+    /**
+     * Returns the corresponding {@link Vector3} to the given direction.
+     * @param x The value to set each vector component to.
+     */
+    export function from(d: Direction): Vector3;
     export function from(x: unknown, y?: number, z?: number): Vector3 {
         if (isDirection(x)) {
             switch (x) {
@@ -683,6 +683,54 @@ export namespace Vec3 {
             y: Math.atanh(v.y),
             z: Math.atanh(v.z)
         };
+    }
+
+    /**
+     * Returns the vector one unit above the given vector.
+     * @param v The specified vector.
+     */
+    export function above(v: Vector3) {
+        return add(v, Up);
+    }
+
+    /**
+     * Returns the vector one unit below the given vector.
+     * @param v The specified vector.
+     */
+    export function below(v: Vector3) {
+        return add(v, Down);
+    }
+
+    /**
+     * Returns the vector one unit north of the given vector.
+     * @param v The specified vector.
+     */
+    export function north(v: Vector3) {
+        return add(v, North);
+    }
+
+    /**
+     * Returns the vector one unit south of the given vector.
+     * @param v The specified vector.
+     */
+    export function south(v: Vector3) {
+        return add(v, South);
+    }
+
+    /**
+     * Returns the vector one unit east of the given vector.
+     * @param v The specified vector.
+     */
+    export function east(v: Vector3) {
+        return add(v, East);
+    }
+
+    /**
+     * Returns the vector one unit west of the given vector.
+     * @param v The specified vector.
+     */
+    export function west(v: Vector3) {
+        return add(v, West);
     }
 
     /**

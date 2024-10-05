@@ -1,6 +1,6 @@
 {
   "name": "@madlad3718/mcvec3",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A library of advanced vector operations for use within the Minecraft scripting API.",
   "main": "dist/index.js",
   "module": "dist/index.js",
