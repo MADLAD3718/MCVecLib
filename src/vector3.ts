@@ -689,48 +689,90 @@ export namespace Vec3 {
      * Returns the vector one unit above the given vector.
      * @param v The specified vector.
      */
-    export function above(v: Vector3) {
-        return add(v, Up);
+    export function above(v: Vector3): Vector3;
+    /**
+     * Adds a scalar multiple of the `Up` vector to another.
+     * @param v The specified vector.
+     * @param s The specified scalar multiple.
+     */
+    export function above(v: Vector3, s: number): Vector3;
+    export function above(v: Vector3, s: number = 1) {
+        return add(v, mul(Up, s));
     }
 
     /**
      * Returns the vector one unit below the given vector.
      * @param v The specified vector.
      */
-    export function below(v: Vector3) {
-        return add(v, Down);
+    export function below(v: Vector3): Vector3;
+    /**
+     * Adds a scalar multiple of the `Down` vector to another.
+     * @param v The specified vector.
+     * @param s The specified scalar multiple.
+     */
+    export function below(v: Vector3, s: number): Vector3;
+    export function below(v: Vector3, s: number = 1) {
+        return add(v, mul(Down, s));
     }
 
     /**
      * Returns the vector one unit north of the given vector.
      * @param v The specified vector.
      */
-    export function north(v: Vector3) {
-        return add(v, North);
+    export function north(v: Vector3): Vector3;
+    /**
+     * Adds a scalar multiple of the `North` vector to another.
+     * @param v The specified vector.
+     * @param s The specified scalar multiple.
+     */
+    export function north(v: Vector3, s: number): Vector3;
+    export function north(v: Vector3, s: number = 1) {
+        return add(v, mul(North, s));
     }
 
     /**
      * Returns the vector one unit south of the given vector.
      * @param v The specified vector.
      */
-    export function south(v: Vector3) {
-        return add(v, South);
+    export function south(v: Vector3): Vector3;
+    /**
+     * Adds a scalar multiple of the `South` vector to another.
+     * @param v The specified vector.
+     * @param s The specified scalar multiple.
+     */
+    export function south(v: Vector3, s: number): Vector3;
+    export function south(v: Vector3, s: number = 1) {
+        return add(v, mul(South, s));
     }
 
     /**
      * Returns the vector one unit east of the given vector.
      * @param v The specified vector.
      */
-    export function east(v: Vector3) {
-        return add(v, East);
+    export function east(v: Vector3): Vector3;
+    /**
+     * Adds a scalar multiple of the `East` vector to another.
+     * @param v The specified vector.
+     * @param s The specified scalar multiple.
+     */
+    export function east(v: Vector3, s: number): Vector3;
+    export function east(v: Vector3, s: number = 1) {
+        return add(v, mul(East, s));
     }
 
     /**
      * Returns the vector one unit west of the given vector.
      * @param v The specified vector.
      */
-    export function west(v: Vector3) {
-        return add(v, West);
+    export function west(v: Vector3): Vector3;
+    /**
+     * Adds a scalar multiple of the `West` vector to another.
+     * @param v The specified vector.
+     * @param s The specified scalar multiple.
+     */
+    export function west(v: Vector3, s: number): Vector3;
+    export function west(v: Vector3, s: number = 1) {
+        return add(v, mul(West, s));
     }
 
     /**
