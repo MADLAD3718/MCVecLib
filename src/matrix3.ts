@@ -167,7 +167,7 @@ export namespace Mat3 {
      * Computes the determinant of a matrix.
      * @param m The specified matrix.
      */
-    export function determinant(m: Matrix3): number {
+    export function det(m: Matrix3): number {
         return m.ux * m.vy * m.wz + m.uy * m.vz * m.wx + m.uz * m.vx * m.wy
              - m.wx * m.vy * m.uz - m.wy * m.vz * m.ux - m.wz * m.vx * m.uy;
     }
@@ -176,7 +176,7 @@ export namespace Mat3 {
      * Returns the cofactor matrix formed from a given matrix.
      * @param m The specified matrix.
      */
-    export function cofactor(m: Matrix3): Matrix3 {
+    export function cof(m: Matrix3): Matrix3 {
         return {
             ux: m.vy * m.wz - m.wy * m.vz,
             vx: m.wy * m.uz - m.uy * m.wz,
@@ -188,5 +188,34 @@ export namespace Mat3 {
             vz: m.wx * m.uy - m.ux * m.wy,
             wz: m.ux * m.vy - m.vx * m.uy
         };
+    }
+
+    /**
+     * Returns the adjugate matrix formed from a given matrix.
+     * @param m The specified matrix.
+     */
+    export function adj(m: Matrix3): Matrix3 {
+        return {
+            ux: m.vy * m.wz - m.wy * m.vz,
+            vx: m.wx * m.vz - m.vx * m.wz,
+            wx: m.vx * m.wy - m.wx * m.vy,
+            uy: m.wy * m.uz - m.uy * m.wz,
+            vy: m.ux * m.wz - m.wx * m.uz,
+            wy: m.wx * m.uy - m.ux * m.wy,
+            uz: m.uy * m.vz - m.vy * m.uz,
+            vz: m.vx * m.uz - m.ux * m.vz,
+            wz: m.ux * m.vy - m.vx * m.uy
+        };
+    }
+
+    /**
+     * Computes the inverse of a given matrix.
+     * @param m The specified matrix.
+     * @throws Throws an error when the matrix is not invertible.
+     */
+    export function inverse(m: Matrix3): Matrix3 {
+        const d = det(m);
+        if (d === 0) throw new Error("Matrix is not invertible.");
+        return mul(adj(m), 1 / det(m));
     }
 }
