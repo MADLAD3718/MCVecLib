@@ -58,7 +58,7 @@ export namespace Vec3 {
      * otherwise **False**.
      */
     export function isVector3(v: any): v is Vector3 {
-        return 'x' in v && 'y' in v && 'z' in v;
+        return typeof v === "object" && 'x' in v && 'y' in v && 'z' in v;
     }
 
     function isDirection(x: any): x is Direction {

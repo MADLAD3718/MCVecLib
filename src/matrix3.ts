@@ -25,9 +25,10 @@ export namespace Mat3 {
     }
 
     export function isMatrix3(m: any): m is Matrix3 {
-        return 'ux' in m && 'uy' in m && 'uz' in m
-            && 'vx' in m && 'vy' in m && 'vz' in m
-            && 'wx' in m && 'wy' in m && 'wz' in m;
+        return typeof m === "object"
+            && 'ux' in m && 'vx' in m && 'wx' in m
+            && 'uy' in m && 'vy' in m && 'wy' in m
+            && 'uz' in m && 'vz' in m && 'wz' in m;
     }
 
     /**
