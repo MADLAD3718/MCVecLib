@@ -41,7 +41,7 @@ export namespace Mat3 {
         return {
             ux: u.x, vx: v.x, wx: w.x,
             uy: u.y, vy: v.y, wy: w.y,
-            uz: u.y, vz: v.z, wz: w.z
+            uz: u.z, vz: v.z, wz: w.z
         };
     }
 
