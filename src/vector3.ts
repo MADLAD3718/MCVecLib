@@ -120,10 +120,10 @@ export namespace Vec3 {
         const a = abs(v), s = sign(v);
         const max = Math.max(a.x, a.y, a.z);
         if (max === a.x)
-            return s.x === 1 ? Direction.East : Direction.West;
+            return s.x >= 0 ? Direction.East : Direction.West;
         else if (max === a.y)
-            return s.y === 1 ? Direction.Up : Direction.Down;
-        else return s.z === 1 ? Direction.South : Direction.North;
+            return s.y >= 0 ? Direction.Up : Direction.Down;
+        else return s.z >= 0 ? Direction.South : Direction.North;
     }
 
     /**
