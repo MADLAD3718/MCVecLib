@@ -1,6 +1,6 @@
 {
   "name": "@madlad3718/mcvec3",
-  "version": "0.1.3",
+  "version": "0.1.6",
   "description": "A library of advanced matrix and vector operations for use within the Minecraft scripting API.",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/MADLAD3718/Minecraft-Vec3-Lib.git"
+    "url": "git+ssh://git@github.com/MADLAD3718/MCVec3.git"
   },
   "keywords": [
     "minecraft",
@@ -25,9 +25,9 @@
   "author": "MADLAD3718",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/MADLAD3718/Minecraft-Vec3-Lib/issues"
+    "url": "https://github.com/MADLAD3718/MCVec3/issues"
   },
-  "homepage": "https://github.com/MADLAD3718/Minecraft-Vec3-Lib#readme",
+  "homepage": "https://github.com/MADLAD3718/MCVec3#readme",
   "dependencies": {
     "@minecraft/server": "^1.14.0"
   },

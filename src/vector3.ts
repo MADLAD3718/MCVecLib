@@ -1,6 +1,4 @@
-import { Direction } from "@minecraft/server";
-
-export interface Vector3 { x: number, y: number, z: number };
+import { Direction, Vector2, Vector3 } from "@minecraft/server";
 
 /**
  * An object that contains an advanced library of vector
@@ -50,6 +48,24 @@ export namespace Vec3 {
      * Value: **[`-1`, `0`, `0`]**
      */
     export const West: Vector3 = { x: -1, y: 0, z: 0 };
+    /**
+     * The standard x basis vector.
+     * 
+     * Value: **[`1`, `0`, `0`]**
+     */
+    export const X: Vector3 = East;
+    /**
+     * The standard y basis vector.
+     * 
+     * Value: **[`0`, `1`, `0`]**
+     */
+    export const Y: Vector3 = Up;
+    /**
+     * The standard z basis vector.
+     * 
+     * Value: **[`0`, `0`, `1`]**
+     */
+    export const Z: Vector3 = South;
 
     /**
      * Tests if a value is of {@link Vector3} type.
@@ -73,9 +89,9 @@ export namespace Vec3 {
     export function from(x: number[]): Vector3;
     /**
      * Constructs a {@link Vector3} from the given values.
-     * @param x The x value of the vector.
-     * @param y The y value of the vector.
-     * @param z The z value of the vector.
+     * @param x The x component of the vector.
+     * @param y The y component of the vector.
+     * @param z The z component of the vector.
      */
     export function from(x: number, y: number, z: number): Vector3;
     export function from(x: unknown, y?: number, z?: number): Vector3 {
@@ -152,6 +168,35 @@ export namespace Vec3 {
     }
 
     /**
+     * Converts a rotation vector to a unit vector.
+     * @param v The specified rotation vector.
+     */
+    export function fromRotation(r: Vector2): Vector3 {
+        function radians(degrees: number): number {
+            return Math.PI * degrees / 180;
+        }
+        return {
+            x: Math.cos(radians(r.y + 90)),
+            y: Math.cos(radians(r.x + 90)),
+            z: Math.sin(radians(r.y + 90))
+        };
+    }
+
+    /**
+     * Converts a unit vector to a rotation vector.
+     * @param v The specified unit vector.
+     */
+    export function toRotation(v: Vector3): Vector2 {
+        function degrees(radians: number): number {
+            return 180 * radians / Math.PI;
+        }
+        return {
+            x: degrees(Math.acos(v.y) - Math.PI / 2),
+            y: degrees(Math.atan2(v.z, v.x) - Math.PI / 2),
+        };
+    }
+
+    /**
      * Converts a vector into an array of three numbers.
      * @param v The specified vector.
      * @returns An array containing the three components of `v`.
@@ -166,8 +211,7 @@ export namespace Vec3 {
      * @param v The specified vector.
      */
     export function toString(v: Vector3): string {
-        const { x, y, z } = v;
-        return [x, y, z].join(' ');
+        return toArray(v).join(' ');
     }
 
     /**
@@ -195,7 +239,7 @@ export namespace Vec3 {
      * @returns Returns **True** if the `v` parameter is +Infinity or -Infinity. Otherwise, **False**.
      */
     export function isinf(v: Vector3): boolean {
-        return !isinf(v);
+        return !isfinite(v);
     }
 
     /**
@@ -512,7 +556,6 @@ export namespace Vec3 {
             z: Math.log2(v.z)
         };
     }
-
 
     /**
      * Returns the base-10 logarithm of the specified vector.
@@ -918,12 +961,14 @@ export namespace Vec3 {
 
     /**
      * Performs a spherical linear interpolation.
-     * @param u The first value.
-     * @param v The second value.
-     * @param t A value that spherically interpolates between the `u` parameter and the `v` parameter.
+     * @param u The first unit vector.
+     * @param v The second unit vector.
+     * @param t A value that spherically interpolates between `u` and `v`.
      * @returns The result of the spherical linear interpolation.
      */
     export function slerp(u: Vector3, v: Vector3, t: number): Vector3 {
+        if (t === 0) return u;
+        if (t === 1) return v;
         const cost = dot(u, v);
         const theta = Math.acos(cost);
         const sint = Math.sqrt(1 - cost * cost);

@@ -1,4 +1,5 @@
-import { Vec3, Vector3 } from "./vector3"
+import { Vector3 } from "@minecraft/server";
+import { Vec3 } from "./vector3"
 
 export interface Matrix3 {
     ux: number, vx: number, wx: number,
