@@ -95,8 +95,8 @@ export namespace Vec3 {
     /**
      * Returns the corresponding unit vector to a 
      * value of the `minecraft:block_face` or the
-     * `minecraft:cardinal_direction` block states.
-     * @param face The value of the block state.
+     * `minecraft:cardinal_direction` block traits.
+     * @param face The value of the block trait.
      * @throws Throws an error when `face` is not of the proper type.
      */
     export function fromBlockFace(face: string): Vector3 {
@@ -109,6 +109,16 @@ export namespace Vec3 {
             case "west": return West;
         }
         throw new Error("Argument was not of type 'block_face' or 'cardinal_direction'.");
+    }
+
+    /**
+     * Converts a vector to a direction string from the
+     * `minecraft:block_face` or `minecraft:cardinal_direction`
+     * block traits.
+     * @param v The specified vector.
+     */
+    export function toBlockFace(v: Vector3): string {
+        return toDirection(v).toLowerCase();
     }
 
     /**
@@ -386,19 +396,19 @@ export namespace Vec3 {
     }
 
     /**
-     * Multiplies a vector `u` by a vector `v`. 
-     * @param v The multiplicand vector.
-     * @param s The multiplier vector.
-     * @returns The component-wise multiplication of `u` and `v`.
-     */
-    export function mul(u: Vector3, v: Vector3): Vector3;
-    /**
      * Multiplies a vector `v` by a scalar value `s`.
      * @param v The multiplicand vector.
      * @param s The scalar multiplier.
      * @returns The image of the vector `v` under scalar multiplication of `s`.
      */
     export function mul(v: Vector3, s: number): Vector3;
+    /**
+     * Multiplies a vector `u` by a vector `v`. 
+     * @param v The multiplicand vector.
+     * @param s The multiplier vector.
+     * @returns The component-wise multiplication of `u` and `v`.
+     */
+    export function mul(u: Vector3, v: Vector3): Vector3;
     export function mul(v: Vector3, m: Vector3 | number): Vector3 {
         if (isVector3(m)) return {
             x: v.x * m.x,
@@ -413,18 +423,18 @@ export namespace Vec3 {
     }
 
     /**
+     * Divides a vector `v` by a scalar value `s`.
+     * @param v The dividend vector.
+     * @param s The scalar divisor.
+     */
+    export function div(v: Vector3, s: number): Vector3;
+    /**
      * Divides a vector `u` by a vector `v`. 
      * @param v The dividend vector.
      * @param s The divisor vector.
      * @returns The component-wise division of `u` and `v`.
      */
     export function div(u: Vector3, v: Vector3): Vector3;
-    /**
-     * Divides a vector `v` by a scalar value `s`.
-     * @param v The dividend vector.
-     * @param s The scalar divisor.
-     */
-    export function div(v: Vector3, s: number): Vector3;
     export function div(v: Vector3, m: Vector3 | number): Vector3 {
         if (isVector3(m)) return {
             x: v.x / m.x,
@@ -433,8 +443,8 @@ export namespace Vec3 {
         };
         else return {
             x: v.x / m,
-            y: v.x / m,
-            z: v.x / m
+            y: v.y / m,
+            z: v.z / m
         };
     }
 
