@@ -143,8 +143,25 @@ export namespace Mat3 {
      * @returns The result of the matrix/vector product between `m` and `v`.
      */
     export function mul(m: Matrix3, v: Vector3): Vector3;
-    export function mul(m: Matrix3, t: Vector3 | number): Matrix3 | Vector3 {
-        if (Vec3.isVector3(t)) return {
+    /**
+     * Multiplies a matrix by another.
+     * @param m The multiplier matrix.
+     * @param n The multiplicand matrix.
+     */
+    export function mul(m: Matrix3, n: Matrix3): Matrix3;
+    export function mul(m: Matrix3, t: Matrix3 | Vector3 | number): Matrix3 | Vector3 {
+        if (isMatrix3(t)) return {
+            ux: Vec3.dot(row1(m), col1(t)),
+            vx: Vec3.dot(row1(m), col2(t)),
+            wx: Vec3.dot(row1(m), col3(t)),
+            uy: Vec3.dot(row2(m), col1(t)),
+            vy: Vec3.dot(row2(m), col2(t)),
+            wy: Vec3.dot(row2(m), col3(t)),
+            uz: Vec3.dot(row3(m), col1(t)),
+            vz: Vec3.dot(row3(m), col2(t)),
+            wz: Vec3.dot(row3(m), col3(t))
+        };
+        else if (Vec3.isVector3(t)) return {
             x: Vec3.dot(row1(m), t),
             y: Vec3.dot(row2(m), t),
             z: Vec3.dot(row3(m), t)
@@ -218,5 +235,17 @@ export namespace Mat3 {
         const det = determinant(m);
         if (det === 0) throw new Error("Matrix is not invertible.");
         return mul(adjugate(m), 1 / det);
+    }
+
+    /**
+     * Constructs a TNB Matrix around a given normal vector.
+     * @param n The specified normal vector.
+     * @returns A Tangent-Normal-Binormal Matrix based on the specified vector.
+     */
+    export function buildTNB(n: Vector3): Matrix3 {
+        const u = Math.abs(n.y) === 1 ?
+            Vec3.West : Vec3.normalize(Vec3.from(n.z, 0, -n.x));
+        const w = Vec3.cross(n, u);
+        return from(u, n, w);
     }
 }
