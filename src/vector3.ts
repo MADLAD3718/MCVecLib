@@ -392,8 +392,8 @@ export namespace Vec3 {
         };
         else return {
             x: v.x * m,
-            y: v.x * m,
-            z: v.x * m
+            y: v.y * m,
+            z: v.z * m
         };
     }
 
