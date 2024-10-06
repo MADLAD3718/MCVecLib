@@ -61,15 +61,16 @@ export namespace Vec3 {
         return typeof v === "object" && 'x' in v && 'y' in v && 'z' in v;
     }
 
-    function isDirection(x: any): x is Direction {
-        return typeof x === "string";
-    }
-
     /**
      * Constructs a {@link Vector3} from the given value.
      * @param x The value to set each vector component to.
      */
     export function from(x: number): Vector3;
+    /**
+     * Constructs a {@link Vector3} from the given array.
+     * @param x An array of 3 numbers corresponding to vector components.
+     */
+    export function from(x: number[]): Vector3;
     /**
      * Constructs a {@link Vector3} from the given values.
      * @param x The x value of the vector.
@@ -77,38 +78,52 @@ export namespace Vec3 {
      * @param z The z value of the vector.
      */
     export function from(x: number, y: number, z: number): Vector3;
-    /**
-     * Constructs a {@link Vector3} from the given array.
-     * @param x An array of 3 numbers corresponding to vector components.
-     */
-    export function from(x: number[]): Vector3;
-    /**
-     * Returns the corresponding {@link Vector3} to the given direction.
-     * @param x The value to set each vector component to.
-     */
-    export function from(d: Direction): Vector3;
     export function from(x: unknown, y?: number, z?: number): Vector3 {
-        if (isDirection(x)) {
-            switch (x) {
-                case Direction.Up: return Up;
-                case Direction.Down: return Down;
-                case Direction.North: return North;
-                case Direction.South: return South;
-                case Direction.East: return East;
-                case Direction.West: return West;
-            }
-        }
         if (typeof x === "number") return {
             x: x,
             y: y ?? x,
             z: z ?? x
         };
-        if (Array.isArray(x)) return {
+        if (Array.isArray(x) && x.length >= 3) return {
             x: x[0],
             y: x[1],
             z: x[2]
         }
         throw new Error("Invalid input values for vector construction.");
+    }
+
+    /**
+     * Returns the corresponding unit vector to a 
+     * value of the `minecraft:block_face` or the
+     * `minecraft:cardinal_direction` block states.
+     * @param face The value of the block state.
+     * @throws Throws an error when `face` is not of the proper type.
+     */
+    export function fromBlockFace(face: string): Vector3 {
+        switch (face) {
+            case "up": return Up;
+            case "down": return Down;
+            case "north": return North;
+            case "south": return South;
+            case "east": return East;
+            case "west": return West;
+        }
+        throw new Error("Argument was not of type 'block_face' or 'cardinal_direction'.");
+    }
+
+    /**
+     * Returns the corresponding {@link Vector3} to the given direction.
+     * @param d The specified direction value.
+     */
+    export function fromDirection(d: Direction): Vector3 {
+        switch (d) {
+            case Direction.Up: return Up;
+            case Direction.Down: return Down;
+            case Direction.North: return North;
+            case Direction.South: return South;
+            case Direction.East: return East;
+            case Direction.West: return West;
+        }
     }
 
     /**

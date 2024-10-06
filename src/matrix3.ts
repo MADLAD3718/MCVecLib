@@ -32,25 +32,35 @@ export namespace Mat3 {
     }
 
     /**
+     * Constructs a {@link Matrix3} from an array of numbers.
+     */
+    export function from(m: number[]): Matrix3;
+    /**
      * Constructs a {@link Matrix3} from three column vectors.
      * @param u The first vector.
      * @param v The second vector.
      * @param w The third vector.
      */
     export function from(u: Vector3, v: Vector3, w: Vector3): Matrix3;
-    export function from(u: Vector3, v: Vector3, w: Vector3): Matrix3 {
-        return {
+    export function from(u: unknown, v?: Vector3, w?: Vector3): Matrix3 {
+        if (Array.isArray(u) && u.length >= 9) return {
+            ux: u[0], vx: u[1], wx: u[2],
+            uy: u[3], vy: u[4], wy: u[5],
+            uz: u[6], vz: u[7], wz: u[8]
+        };
+        if (Vec3.isVector3(u) && v && w) return {
             ux: u.x, vx: v.x, wx: w.x,
             uy: u.y, vy: v.y, wy: w.y,
             uz: u.z, vz: v.z, wz: w.z
         };
+        throw new Error("Invalid input values for vector construction.");
     }
 
     /**
      * Returns the first column vector in a matrix.
      * @param m The specified matrix.
      */
-    export function col1(m: Matrix3): Vector3 {
+    export function c1(m: Matrix3): Vector3 {
         return {
             x: m.ux,
             y: m.uy,
@@ -62,7 +72,7 @@ export namespace Mat3 {
      * Returns the second column vector in a matrix.
      * @param m The specified matrix.
      */
-    export function col2(m: Matrix3): Vector3 {
+    export function c2(m: Matrix3): Vector3 {
         return {
             x: m.vx,
             y: m.vy,
@@ -74,7 +84,7 @@ export namespace Mat3 {
      * Returns the third column vector in a matrix.
      * @param m The specified matrix.
      */
-    export function col3(m: Matrix3): Vector3 {
+    export function c3(m: Matrix3): Vector3 {
         return {
             x: m.wx,
             y: m.wy,
@@ -86,7 +96,7 @@ export namespace Mat3 {
      * Returns the first row vector in a matrix.
      * @param m The specified matrix.
      */
-    export function row1(m: Matrix3): Vector3 {
+    export function r1(m: Matrix3): Vector3 {
         return {
             x: m.ux,
             y: m.vx,
@@ -98,7 +108,7 @@ export namespace Mat3 {
      * Returns the second row vector in a matrix.
      * @param m The specified matrix.
      */
-    export function row2(m: Matrix3): Vector3 {
+    export function r2(m: Matrix3): Vector3 {
         return {
             x: m.uy,
             y: m.vy,
@@ -110,23 +120,11 @@ export namespace Mat3 {
      * Returns the third row vector in a matrix.
      * @param m The specified matrix.
      */
-    export function row3(m: Matrix3): Vector3 {
+    export function r3(m: Matrix3): Vector3 {
         return {
             x: m.uz,
             y: m.vz,
             z: m.wz
-        };
-    }
-
-    /**
-     * Transposes a matrix.
-     * @param m The specified matrix.
-     */
-    export function transpose(m: Matrix3): Matrix3 {
-        return {
-            ux: m.ux, vx: m.uy, wx: m.uz,
-            uy: m.vx, vy: m.vy, wy: m.vz,
-            uz: m.wx, vz: m.wy, wz: m.wz
         };
     }
 
@@ -151,20 +149,20 @@ export namespace Mat3 {
     export function mul(m: Matrix3, n: Matrix3): Matrix3;
     export function mul(m: Matrix3, t: Matrix3 | Vector3 | number): Matrix3 | Vector3 {
         if (isMatrix3(t)) return {
-            ux: Vec3.dot(row1(m), col1(t)),
-            vx: Vec3.dot(row1(m), col2(t)),
-            wx: Vec3.dot(row1(m), col3(t)),
-            uy: Vec3.dot(row2(m), col1(t)),
-            vy: Vec3.dot(row2(m), col2(t)),
-            wy: Vec3.dot(row2(m), col3(t)),
-            uz: Vec3.dot(row3(m), col1(t)),
-            vz: Vec3.dot(row3(m), col2(t)),
-            wz: Vec3.dot(row3(m), col3(t))
+            ux: Vec3.dot(r1(m), c1(t)),
+            vx: Vec3.dot(r1(m), c2(t)),
+            wx: Vec3.dot(r1(m), c3(t)),
+            uy: Vec3.dot(r2(m), c1(t)),
+            vy: Vec3.dot(r2(m), c2(t)),
+            wy: Vec3.dot(r2(m), c3(t)),
+            uz: Vec3.dot(r3(m), c1(t)),
+            vz: Vec3.dot(r3(m), c2(t)),
+            wz: Vec3.dot(r3(m), c3(t))
         };
         else if (Vec3.isVector3(t)) return {
-            x: Vec3.dot(row1(m), t),
-            y: Vec3.dot(row2(m), t),
-            z: Vec3.dot(row3(m), t)
+            x: Vec3.dot(r1(m), t),
+            y: Vec3.dot(r2(m), t),
+            z: Vec3.dot(r3(m), t)
         };
         else return {
             ux: m.ux * t, vx: m.vx * t, wx: m.wx * t,
@@ -188,6 +186,18 @@ export namespace Mat3 {
     export function determinant(m: Matrix3): number {
         return m.ux * m.vy * m.wz + m.uy * m.vz * m.wx + m.uz * m.vx * m.wy
              - m.wx * m.vy * m.uz - m.wy * m.vz * m.ux - m.wz * m.vx * m.uy;
+    }
+    
+    /**
+     * Transposes a matrix.
+     * @param m The specified matrix.
+     */
+    export function transpose(m: Matrix3): Matrix3 {
+        return {
+            ux: m.ux, vx: m.uy, wx: m.uz,
+            uy: m.vx, vy: m.vy, wy: m.vz,
+            uz: m.wx, vz: m.wy, wz: m.wz
+        };
     }
 
     /**
