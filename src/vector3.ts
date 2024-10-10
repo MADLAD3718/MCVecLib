@@ -413,32 +413,32 @@ export namespace Vec3 {
 
     /**
      * Adds a set of vectors together.
-     * @param args The vectors to add together.
+     * @param v The initial vector.
+     * @param args The vectors to add to `v`.
      * @returns The result of the addition of all argument vectors.
      */
-    export function add(...args: Vector3[]): Vector3 {
-        let result: Vector3 = Zero;
-        for (const v of args) result = {
-            x: result.x + v.x,
-            y: result.y + v.y,
-            z: result.z + v.z
-        }
-        return result;
+    export function add(v: Vector3, ...args: Vector3[]): Vector3 {
+        for (const arg of args) v = {
+            x: v.x + arg.x,
+            y: v.y + arg.y,
+            z: v.z + arg.z
+        };
+        return v;
     }
 
     /**
      * Subtracts a set of vectors from one another.
-     * @param args The vectors to subtract.
+     * @param v The initial vector.
+     * @param args The vectors to subtract from `v`.
      * @returns The result of the subtraction of all argument vectors.
      */
-    export function sub(...args: Vector3[]): Vector3 {
-        let result = args.shift() as Vector3;
-        for (const v of args) result = {
-            x: result.x - v.x,
-            y: result.y - v.y,
-            z: result.z - v.z
+    export function sub(v: Vector3, ...args: Vector3[]): Vector3 {
+        for (const arg of args) v = {
+            x: v.x - arg.x,
+            y: v.y - arg.y,
+            z: v.z - arg.z
         }
-        return result;
+        return v;
     }
 
     /**

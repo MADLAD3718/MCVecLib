@@ -265,30 +265,30 @@ export namespace Vec2 {
 
     /**
      * Adds a set of vectors together.
-     * @param args The vectors to add together.
+     * @param v The initial vector.
+     * @param args The vectors to add to `v`.
      * @returns The result of the addition of all argument vectors.
      */
-    export function add(...args: Vector2[]): Vector2 {
-        let result: Vector2 = Zero;
-        for (const v of args) result = {
-            x: result.x + v.x,
-            y: result.y + v.y
-        }
-        return result;
+    export function add(v: Vector2, ...args: Vector2[]): Vector2 {
+        for (const arg of args) v = {
+            x: v.x + arg.x,
+            y: v.y + arg.y
+        };
+        return v;
     }
     
     /**
      * Subtracts a set of vectors from one another.
-     * @param args The vectors to subtract.
+     * @param v The initial vector.
+     * @param args The vectors to subtract from `v`.
      * @returns The result of the subtraction of all argument vectors.
      */
-    export function sub(...args: Vector2[]): Vector2 {
-        let result = args.shift() as Vector2;
-        for (const v of args) result = {
-            x: result.x - v.x,
-            y: result.y - v.y
+    export function sub(v: Vector2, ...args: Vector2[]): Vector2 {
+        for (const arg of args) v = {
+            x: v.x - arg.x,
+            y: v.y - arg.y
         }
-        return result;
+        return v;
     }
 
     /**
