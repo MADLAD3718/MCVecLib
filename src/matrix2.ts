@@ -2,8 +2,8 @@ import { Vector2 } from "@minecraft/server";
 import { Vec2 } from "./vector2";
 
 export interface Matrix2 {
-    ux: number, vx: number,
-    uy: number, vy: number
+    m11: number, m12: number,
+    m21: number, m22: number
 }
 
 export namespace Mat2 {
@@ -17,8 +17,8 @@ export namespace Mat2 {
      * **[`0`, `1`]**
      */
     export const Identity: Matrix2 = {
-        ux: 1, vx: 0,
-        uy: 0, vy: 1,
+        m11: 1, m12: 0,
+        m21: 0, m22: 1,
     }
 
     export function isMatrix2(m: any): m is Matrix2 {
@@ -39,12 +39,12 @@ export namespace Mat2 {
     export function from(u: Vector2, v: Vector2): Matrix2;
     export function from(u: unknown, v?: Vector2): Matrix2 {
         if (Array.isArray(u) && u.length >= 4) return {
-            ux: u[0], vx: u[1],
-            uy: u[2], vy: u[3]
+            m11: u[0], m12: u[1],
+            m21: u[2], m22: u[3]
         };
         if (Vec2.isVector2(u) && v) return {
-            ux: u.x, vx: v.x,
-            uy: u.y, vy: v.y
+            m11: u.x, m12: v.x,
+            m21: u.y, m22: v.y
         };
         throw new Error("Invalid input values for vector construction.");
     }
@@ -55,8 +55,8 @@ export namespace Mat2 {
      */
     export function c1(m: Matrix2): Vector2 {
         return {
-            x: m.ux,
-            y: m.uy
+            x: m.m11,
+            y: m.m21
         };
     }
 
@@ -66,8 +66,8 @@ export namespace Mat2 {
      */
     export function c2(m: Matrix2): Vector2 {
         return {
-            x: m.vx,
-            y: m.vy
+            x: m.m12,
+            y: m.m22
         };
     }
 
@@ -77,8 +77,8 @@ export namespace Mat2 {
      */
     export function r1(m: Matrix2): Vector2 {
         return {
-            x: m.ux,
-            y: m.vx
+            x: m.m11,
+            y: m.m12
         };
     }
 
@@ -88,8 +88,8 @@ export namespace Mat2 {
      */
     export function r2(m: Matrix2): Vector2 {
         return {
-            x: m.uy,
-            y: m.vy
+            x: m.m21,
+            y: m.m22
         };
     }
 
@@ -114,18 +114,18 @@ export namespace Mat2 {
     export function mul(m: Matrix2, n: Matrix2): Matrix2;
     export function mul(m: Matrix2, t: Matrix2 | Vector2 | number): Matrix2 | Vector2 {
         if (isMatrix2(t)) return {
-            ux: Vec2.dot(r1(m), c1(t)),
-            vx: Vec2.dot(r1(m), c2(t)),
-            uy: Vec2.dot(r2(m), c1(t)),
-            vy: Vec2.dot(r2(m), c2(t)),
+            m11: Vec2.dot(r1(m), c1(t)),
+            m12: Vec2.dot(r1(m), c2(t)),
+            m21: Vec2.dot(r2(m), c1(t)),
+            m22: Vec2.dot(r2(m), c2(t)),
         };
         else if (Vec2.isVector2(t)) return {
             x: Vec2.dot(r1(m), t),
             y: Vec2.dot(r2(m), t)
         };
         else return {
-            ux: m.ux * t, vx: m.vx * t,
-            uy: m.uy * t, vy: m.vy * t
+            m11: m.m11 * t, m12: m.m12 * t,
+            m21: m.m21 * t, m22: m.m22 * t
         };
     }
 
@@ -134,7 +134,7 @@ export namespace Mat2 {
      * @param m The specified matrix.
      */
     export function trace(m: Matrix2): number {
-        return m.ux + m.vy;
+        return m.m11 + m.m22;
     }
 
     /**
@@ -142,7 +142,7 @@ export namespace Mat2 {
      * @param m The specified matrix.
      */
     export function determinant(m: Matrix2): number {
-        return m.ux * m.vy - m.vx * m.uy;
+        return m.m11 * m.m22 - m.m12 * m.m21;
     }
     
     /**
@@ -151,8 +151,8 @@ export namespace Mat2 {
      */
     export function transpose(m: Matrix2): Matrix2 {
         return {
-            ux: m.ux, vx: m.uy,
-            uy: m.vx, vy: m.vy
+            m11: m.m11, m12: m.m21,
+            m21: m.m12, m22: m.m22
         };
     }
 
@@ -162,8 +162,8 @@ export namespace Mat2 {
      */
     export function cofactor(m: Matrix2): Matrix2 {
         return {
-            ux:  m.vy, vx: -m.uy,
-            uy: -m.vx, vy:  m.ux
+            m11:  m.m22, m12: -m.m21,
+            m21: -m.m12, m22:  m.m11
         };
     }
 
@@ -173,8 +173,8 @@ export namespace Mat2 {
      */
     export function adjugate(m: Matrix2): Matrix2 {
         return {
-            ux:  m.vy, vx: -m.vx,
-            uy: -m.uy, vy:  m.ux
+            m11:  m.m22, m12: -m.m12,
+            m21: -m.m21, m22:  m.m11
         };
     }
 

@@ -2,9 +2,9 @@ import { Vector3 } from "@minecraft/server";
 import { Vec3 } from "./vector3"
 
 export interface Matrix3 {
-    ux: number, vx: number, wx: number,
-    uy: number, vy: number, wy: number,
-    uz: number, vz: number, wz: number
+    m11: number, m12: number, m13: number,
+    m21: number, m22: number, m23: number,
+    m31: number, m32: number, m33: number
 }
 
 export namespace Mat3 {
@@ -20,9 +20,9 @@ export namespace Mat3 {
      * **[`0`, `0`, `1`]**
      */
     export const Identity: Matrix3 = {
-        ux: 1, vx: 0, wx: 0,
-        uy: 0, vy: 1, wy: 0,
-        uz: 0, vz: 0, wz: 1
+        m11: 1, m12: 0, m13: 0,
+        m21: 0, m22: 1, m23: 0,
+        m31: 0, m32: 0, m33: 1
     }
 
     export function isMatrix3(m: any): m is Matrix3 {
@@ -45,14 +45,14 @@ export namespace Mat3 {
     export function from(u: Vector3, v: Vector3, w: Vector3): Matrix3;
     export function from(u: unknown, v?: Vector3, w?: Vector3): Matrix3 {
         if (Array.isArray(u) && u.length >= 9) return {
-            ux: u[0], vx: u[1], wx: u[2],
-            uy: u[3], vy: u[4], wy: u[5],
-            uz: u[6], vz: u[7], wz: u[8]
+            m11: u[0], m12: u[1], m13: u[2],
+            m21: u[3], m22: u[4], m23: u[5],
+            m31: u[6], m32: u[7], m33: u[8]
         };
         if (Vec3.isVector3(u) && v && w) return {
-            ux: u.x, vx: v.x, wx: w.x,
-            uy: u.y, vy: v.y, wy: w.y,
-            uz: u.z, vz: v.z, wz: w.z
+            m11: u.x, m12: v.x, m13: w.x,
+            m21: u.y, m22: v.y, m23: w.y,
+            m31: u.z, m32: v.z, m33: w.z
         };
         throw new Error("Invalid input values for vector construction.");
     }
@@ -63,9 +63,9 @@ export namespace Mat3 {
      */
     export function c1(m: Matrix3): Vector3 {
         return {
-            x: m.ux,
-            y: m.uy,
-            z: m.uz
+            x: m.m11,
+            y: m.m21,
+            z: m.m31
         };
     }
 
@@ -75,9 +75,9 @@ export namespace Mat3 {
      */
     export function c2(m: Matrix3): Vector3 {
         return {
-            x: m.vx,
-            y: m.vy,
-            z: m.vz
+            x: m.m12,
+            y: m.m22,
+            z: m.m32
         };
     }
 
@@ -87,9 +87,9 @@ export namespace Mat3 {
      */
     export function c3(m: Matrix3): Vector3 {
         return {
-            x: m.wx,
-            y: m.wy,
-            z: m.wz
+            x: m.m13,
+            y: m.m23,
+            z: m.m33
         };
     }
 
@@ -99,9 +99,9 @@ export namespace Mat3 {
      */
     export function r1(m: Matrix3): Vector3 {
         return {
-            x: m.ux,
-            y: m.vx,
-            z: m.wx
+            x: m.m11,
+            y: m.m12,
+            z: m.m13
         };
     }
 
@@ -111,9 +111,9 @@ export namespace Mat3 {
      */
     export function r2(m: Matrix3): Vector3 {
         return {
-            x: m.uy,
-            y: m.vy,
-            z: m.wy
+            x: m.m21,
+            y: m.m22,
+            z: m.m23
         };
     }
 
@@ -123,9 +123,9 @@ export namespace Mat3 {
      */
     export function r3(m: Matrix3): Vector3 {
         return {
-            x: m.uz,
-            y: m.vz,
-            z: m.wz
+            x: m.m31,
+            y: m.m32,
+            z: m.m33
         };
     }
 
@@ -150,15 +150,15 @@ export namespace Mat3 {
     export function mul(m: Matrix3, n: Matrix3): Matrix3;
     export function mul(m: Matrix3, t: Matrix3 | Vector3 | number): Matrix3 | Vector3 {
         if (isMatrix3(t)) return {
-            ux: Vec3.dot(r1(m), c1(t)),
-            vx: Vec3.dot(r1(m), c2(t)),
-            wx: Vec3.dot(r1(m), c3(t)),
-            uy: Vec3.dot(r2(m), c1(t)),
-            vy: Vec3.dot(r2(m), c2(t)),
-            wy: Vec3.dot(r2(m), c3(t)),
-            uz: Vec3.dot(r3(m), c1(t)),
-            vz: Vec3.dot(r3(m), c2(t)),
-            wz: Vec3.dot(r3(m), c3(t))
+            m11: Vec3.dot(r1(m), c1(t)),
+            m12: Vec3.dot(r1(m), c2(t)),
+            m13: Vec3.dot(r1(m), c3(t)),
+            m21: Vec3.dot(r2(m), c1(t)),
+            m22: Vec3.dot(r2(m), c2(t)),
+            m23: Vec3.dot(r2(m), c3(t)),
+            m31: Vec3.dot(r3(m), c1(t)),
+            m32: Vec3.dot(r3(m), c2(t)),
+            m33: Vec3.dot(r3(m), c3(t))
         };
         else if (Vec3.isVector3(t)) return {
             x: Vec3.dot(r1(m), t),
@@ -166,9 +166,9 @@ export namespace Mat3 {
             z: Vec3.dot(r3(m), t)
         };
         else return {
-            ux: m.ux * t, vx: m.vx * t, wx: m.wx * t,
-            uy: m.uy * t, vy: m.vy * t, wy: m.wy * t,
-            uz: m.uz * t, vz: m.vz * t, wz: m.wz * t
+            m11: m.m11 * t, m12: m.m12 * t, m13: m.m13 * t,
+            m21: m.m21 * t, m22: m.m22 * t, m23: m.m23 * t,
+            m31: m.m31 * t, m32: m.m32 * t, m33: m.m33 * t
         };
     }
 
@@ -177,7 +177,7 @@ export namespace Mat3 {
      * @param m The specified matrix.
      */
     export function trace(m: Matrix3): number {
-        return m.ux + m.vy + m.wz;
+        return m.m11 + m.m22 + m.m33;
     }
 
     /**
@@ -185,8 +185,8 @@ export namespace Mat3 {
      * @param m The specified matrix.
      */
     export function determinant(m: Matrix3): number {
-        return m.ux * m.vy * m.wz + m.uy * m.vz * m.wx + m.uz * m.vx * m.wy
-             - m.wx * m.vy * m.uz - m.wy * m.vz * m.ux - m.wz * m.vx * m.uy;
+        return m.m11 * m.m22 * m.m33 + m.m21 * m.m32 * m.m13 + m.m31 * m.m12 * m.m23
+             - m.m13 * m.m22 * m.m31 - m.m23 * m.m32 * m.m11 - m.m33 * m.m12 * m.m21;
     }
     
     /**
@@ -195,9 +195,9 @@ export namespace Mat3 {
      */
     export function transpose(m: Matrix3): Matrix3 {
         return {
-            ux: m.ux, vx: m.uy, wx: m.uz,
-            uy: m.vx, vy: m.vy, wy: m.vz,
-            uz: m.wx, vz: m.wy, wz: m.wz
+            m11: m.m11, m12: m.m21, m13: m.m31,
+            m21: m.m12, m22: m.m22, m23: m.m32,
+            m31: m.m13, m32: m.m23, m33: m.m33
         };
     }
 
@@ -207,15 +207,15 @@ export namespace Mat3 {
      */
     export function cofactor(m: Matrix3): Matrix3 {
         return {
-            ux: m.vy * m.wz - m.wy * m.vz,
-            vx: m.wy * m.uz - m.uy * m.wz,
-            wx: m.uy * m.vz - m.vy * m.uz,
-            uy: m.wx * m.vz - m.vx * m.wz,
-            vy: m.ux * m.wz - m.wx * m.uz,
-            wy: m.vx * m.uz - m.ux * m.vz,
-            uz: m.vx * m.wy - m.wx * m.vy,
-            vz: m.wx * m.uy - m.ux * m.wy,
-            wz: m.ux * m.vy - m.vx * m.uy
+            m11: m.m22 * m.m33 - m.m23 * m.m32,
+            m12: m.m23 * m.m31 - m.m21 * m.m33,
+            m13: m.m21 * m.m32 - m.m22 * m.m31,
+            m21: m.m13 * m.m32 - m.m12 * m.m33,
+            m22: m.m11 * m.m33 - m.m13 * m.m31,
+            m23: m.m12 * m.m31 - m.m11 * m.m32,
+            m31: m.m12 * m.m23 - m.m13 * m.m22,
+            m32: m.m13 * m.m21 - m.m11 * m.m23,
+            m33: m.m11 * m.m22 - m.m12 * m.m21
         };
     }
 
@@ -225,15 +225,15 @@ export namespace Mat3 {
      */
     export function adjugate(m: Matrix3): Matrix3 {
         return {
-            ux: m.vy * m.wz - m.wy * m.vz,
-            vx: m.wx * m.vz - m.vx * m.wz,
-            wx: m.vx * m.wy - m.wx * m.vy,
-            uy: m.wy * m.uz - m.uy * m.wz,
-            vy: m.ux * m.wz - m.wx * m.uz,
-            wy: m.wx * m.uy - m.ux * m.wy,
-            uz: m.uy * m.vz - m.vy * m.uz,
-            vz: m.vx * m.uz - m.ux * m.vz,
-            wz: m.ux * m.vy - m.vx * m.uy
+            m11: m.m22 * m.m33 - m.m23 * m.m32,
+            m12: m.m13 * m.m32 - m.m12 * m.m33,
+            m13: m.m12 * m.m23 - m.m13 * m.m22,
+            m21: m.m23 * m.m31 - m.m21 * m.m33,
+            m22: m.m11 * m.m33 - m.m13 * m.m31,
+            m23: m.m13 * m.m21 - m.m11 * m.m23,
+            m31: m.m21 * m.m32 - m.m22 * m.m31,
+            m32: m.m12 * m.m31 - m.m11 * m.m32,
+            m33: m.m11 * m.m22 - m.m12 * m.m21
         };
     }
 

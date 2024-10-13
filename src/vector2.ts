@@ -8,18 +8,43 @@ export namespace Vec2 {
      * Value: **[`0`, `0`]**
      */
     export const Zero: Vector2 = { x: 0, y: 0 };
+
+    /**
+     * The unit vector in the up direction.
+     * 
+     * Value: **[`0`, `1`]**
+     */
+    export const Up: Vector2 = { x: 0, y: 1 };
+    /**
+     * The unit vector in the down direction.
+     * 
+     * Value: **[`0`, `-1`]**
+     */
+    export const Down: Vector2 = { x: 0, y: -1 };
+    /**
+     * The unit vector in the left direction.
+     * 
+     * Value: **[`-1`, `0`]**
+     */
+    export const Left: Vector2 = { x: -1, y: 0 };
+    /**
+     * The unit vector in the right direction.
+     * 
+     * Value: **[`1`, `0`]**
+     */
+    export const Right: Vector2 = { x: 1, y: 0 };
     /**
      * The standard x basis vector.
      * 
      * Value: **[`1`, `0`]**
      */
-    export const X: Vector2 = { x: 1, y: 0 };
+    export const X: Vector2 = Right;
     /**
      * The standard y basis vector.
      * 
      * Value: **[`0`, `1`]**
      */
-    export const Y: Vector2 = { x: 0, y: 1 };
+    export const Y: Vector2 = Up;
 
     /**
      * Tests if a value is of {@link Vector2} type.

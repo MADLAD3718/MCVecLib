@@ -168,32 +168,18 @@ export namespace Vec3 {
     }
 
     /**
-     * Converts a rotation vector to a unit vector.
-     * @param v The specified rotation vector.
-     */
-    export function fromRotation(r: Vector2): Vector3 {
-        function radians(degrees: number): number {
-            return Math.PI * degrees / 180;
-        }
-        return {
-            x: Math.cos(radians(r.y + 90)),
-            y: Math.cos(radians(r.x + 90)),
-            z: Math.sin(radians(r.y + 90))
-        };
-    }
-
-    /**
      * Converts a unit vector to a rotation vector.
      * @param v The specified unit vector.
      */
     export function toRotation(v: Vector3): Vector2 {
-        function degrees(radians: number): number {
-            return 180 * radians / Math.PI;
-        }
+        const y = Math.atan2(v.x, v.z);
         return {
-            x: degrees(Math.acos(v.y) - Math.PI / 2),
-            y: degrees(Math.atan2(v.z, v.x) - Math.PI / 2),
+            x: -degrees(Math.asin(v.y)),
+            y: -degrees(y >= Math.PI ? y - Math.PI : y),
         };
+    }
+    function degrees(radians: number): number {
+        return 180 * radians / Math.PI;
     }
 
     /**

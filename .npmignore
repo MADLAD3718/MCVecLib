@@ -1,5 +1,10 @@
 node_modules
+tests
 src
 
 tsconfig.json
 tsup.config.ts
+
+.gitattributes
+.gitignore
+.vscode
