@@ -1,6 +1,9 @@
 import { Vector2 } from "@minecraft/server";
 import { Mat2 } from "./matrix2";
 
+/**
+ * Includes various 2D vector functions and values.
+ */
 export namespace Vec2 {
     /**
      * The zero vector.
@@ -8,6 +11,12 @@ export namespace Vec2 {
      * Value: **[`0`, `0`]**
      */
     export const Zero: Vector2 = { x: 0, y: 0 };
+    /**
+     * The one vector.
+     * 
+     * Value: **[`1`, `1`]**
+     */
+    export const One: Vector2 = { x: 1, y: 1 };
 
     /**
      * The unit vector in the up direction.
@@ -186,6 +195,17 @@ export namespace Vec2 {
         return {
             x: Math.min(Math.max(v.x, min.x), max.x),
             y: Math.min(Math.max(v.y, min.y), max.y)
+        };
+    }
+
+    /**
+     * Clamps the specified vector within the range 0 to 1.
+     * @param v The specified vector.
+     */
+    export function saturate(v: Vector2): Vector2 {
+        return {
+            x: Math.min(Math.max(v.x, 0), 1),
+            y: Math.min(Math.max(v.y, 0), 1)
         };
     }
 

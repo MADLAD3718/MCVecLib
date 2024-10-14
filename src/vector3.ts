@@ -1,8 +1,7 @@
 import { Direction, Vector2, Vector3 } from "@minecraft/server";
 
 /**
- * An object that contains an advanced library of vector
- * functions and values.
+ * Includes various 3D vector functions and values.
  */
 export namespace Vec3 {
     /**
@@ -11,6 +10,12 @@ export namespace Vec3 {
      * Value: **[`0`, `0`, `0`]**
      */
     export const Zero: Vector3 = { x: 0, y: 0, z: 0 };
+    /**
+     * The one vector.
+     * 
+     * Value: **[`1`, `1`, `1`]**
+     */
+    export const One: Vector3 = { x: 1, y: 1, z: 1 };
 
     /**
      * The unit vector in the up direction.
@@ -287,6 +292,18 @@ export namespace Vec3 {
             x: Math.min(Math.max(v.x, min.x), max.x),
             y: Math.min(Math.max(v.y, min.y), max.y),
             z: Math.min(Math.max(v.z, min.z), max.z)
+        };
+    }
+
+    /**
+     * Clamps the specified vector within the range 0 to 1.
+     * @param v The specified vector.
+     */
+    export function saturate(v: Vector3): Vector3 {
+        return {
+            x: Math.min(Math.max(v.x, 0), 1),
+            y: Math.min(Math.max(v.y, 0), 1),
+            z: Math.min(Math.max(v.z, 0), 1)
         };
     }
 

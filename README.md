@@ -1,1 +1,1 @@
-This library is going to be the best Minecraft Vector3 utility library to ever grace the internet.
+A library of advanced matrix and vector operations for use within the Minecraft scripting API.

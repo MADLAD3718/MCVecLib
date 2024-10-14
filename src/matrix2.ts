@@ -6,6 +6,10 @@ export interface Matrix2 {
     m21: number, m22: number
 }
 
+
+/**
+ * Includes various 2x2 matrix functions and values.
+ */
 export namespace Mat2 {
     /**
      * The identity matrix.

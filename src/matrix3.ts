@@ -7,6 +7,9 @@ export interface Matrix3 {
     m31: number, m32: number, m33: number
 }
 
+/**
+ * Includes various 3x3 matrix functions and values.
+ */
 export namespace Mat3 {
     /**
      * The identity matrix.
@@ -249,14 +252,14 @@ export namespace Mat3 {
     }
 
     /**
-     * Constructs a TNB Matrix around a given normal vector.
+     * Constructs an axis-aligned Tangent-Normal-Binormal Matrix around a given normal vector.
      * @param n The specified normal vector.
-     * @returns A Tangent-Normal-Binormal Matrix based on the specified vector.
+     * @returns A TNB Matrix based on the specified vector.
      */
     export function buildTNB(n: Vector3): Matrix3 {
-        const u = Math.abs(n.y) === 1 ?
-            Vec3.West : Vec3.normalize(Vec3.from(n.z, 0, -n.x));
-        const w = Vec3.cross(n, u);
-        return from(u, n, w);
+        const t = Math.abs(n.y) === 1 ? Vec3.East :
+        Vec3.normalize(Vec3.from(n.z, 0, -n.x));
+        const b = Vec3.cross(t, n);
+        return Mat3.from(t, n, b);
     }
 }
