@@ -177,10 +177,9 @@ export namespace Vec3 {
      * @param v The specified unit vector.
      */
     export function toRotation(v: Vector3): Vector2 {
-        const y = Math.atan2(v.x, v.z);
         return {
             x: -degrees(Math.asin(v.y)),
-            y: -degrees(y >= Math.PI ? y - Math.PI : y),
+            y: -degrees(Math.atan2(v.x, v.z)),
         };
     }
     function degrees(radians: number): number {
