@@ -27,8 +27,8 @@ export namespace Mat2 {
 
     export function isMatrix2(m: any): m is Matrix2 {
         return typeof m === "object"
-            && 'ux' in m && 'vx' in m
-            && 'uy' in m && 'vy' in m;
+            && 'm11' in m && 'm12' in m
+            && 'm21' in m && 'm22' in m;
     }
 
     /**
