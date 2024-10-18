@@ -146,21 +146,21 @@ export namespace Vec2 {
     }
 
     /**
-     * Determines if the specified vector is NaN.
+     * Determines if the specified vector is `NaN`.
      * @param v The specified vector.
-     * @returns Returns **True** if the `v` parameter is NaN. Otherwise, **False**.
+     * @returns Returns **True** if the `v` parameter is `NaN`. Otherwise, **False**.
      */
-    export function isnan(v: Vector2): boolean {
+    export function isNaN(v: Vector2): boolean {
         return Number.isNaN(v.x) || Number.isNaN(v.y);
     }
 
     /**
      * Determines if the specified vector is infinite.
      * @param v The specified vector.
-     * @returns Returns **True** if the `v` parameter is +Infinity or -Infinity. Otherwise, **False**.
+     * @returns Returns **True** if the `v` parameter is `+Infinity` or `-Infinity`. Otherwise, **False**.
      */
-    export function isinf(v: Vector2): boolean {
-        return !isfinite(v);
+    export function isInf(v: Vector2): boolean {
+        return !isFinite(v);
     }
 
     /**
@@ -168,7 +168,7 @@ export namespace Vec2 {
      * @param v The specified vector.
      * @returns Returns **True** if the `v` parameter is finite; otherwise **False**.
      */
-    export function isfinite(v: Vector2): boolean {
+    export function isFinite(v: Vector2): boolean {
         return Number.isFinite(v.x) && Number.isFinite(v.y);
     }
 

@@ -35,10 +35,11 @@ function angleToClosestEntity(player: Player): number {
     return Math.acos(v_dot_e);
 }
 ```
+
 Get a random block within a 30° offset from a player's view direction:
 ```ts
 import { Mat3, RandVec } from "@madlad3718/mcvec3";
-import { world } from "@minecraft/server";
+import { Player, Block } from "@minecraft/server";
 
 function randomVisibleBlock(player: Player): Block | undefined {
     // Get the player's head position and view vector.
@@ -50,7 +51,7 @@ function randomVisibleBlock(player: Player): Block | undefined {
     const basis = Mat3.buildTNB(view);
 
     // Compute the direction by multiplying a random spherical cap
-    // sample with maximum offset of 30° by the view TNB.
+    // sample with maximum offset of 30° by the view matrix.
     const direction = Mat3.mul(basis, RandVec.cap(Math.PI / 6));
 
     // Get the block by casting a ray from the player's head position

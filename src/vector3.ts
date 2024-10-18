@@ -241,21 +241,21 @@ export namespace Vec3 {
     }
 
     /**
-     * Determines if the specified vector is NaN.
+     * Determines if the specified vector is `NaN`.
      * @param v The specified vector.
-     * @returns Returns **True** if the `v` parameter is NaN. Otherwise, **False**.
+     * @returns Returns **True** if the `v` parameter is `NaN`. Otherwise, **False**.
      */
-    export function isnan(v: Vector3): boolean {
+    export function isNaN(v: Vector3): boolean {
         return Number.isNaN(v.x) || Number.isNaN(v.y) || Number.isNaN(v.z);
     }
 
     /**
      * Determines if the specified vector is infinite.
      * @param v The specified vector.
-     * @returns Returns **True** if the `v` parameter is +Infinity or -Infinity. Otherwise, **False**.
+     * @returns Returns **True** if the `v` parameter is `+Infinity` or `-Infinity`. Otherwise, **False**.
      */
-    export function isinf(v: Vector3): boolean {
-        return !isfinite(v);
+    export function isInf(v: Vector3): boolean {
+        return !isFinite(v);
     }
 
     /**
@@ -263,7 +263,7 @@ export namespace Vec3 {
      * @param v The specified vector.
      * @returns Returns **True** if the `v` parameter is finite; otherwise **False**.
      */
-    export function isfinite(v: Vector3): boolean {
+    export function isFinite(v: Vector3): boolean {
         return Number.isFinite(v.x) && Number.isFinite(v.y) && Number.isFinite(v.z);
     }
 
