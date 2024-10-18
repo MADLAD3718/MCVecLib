@@ -6,7 +6,6 @@ export interface Matrix2 {
     m21: number, m22: number
 }
 
-
 /**
  * Includes various 2x2 matrix functions and values.
  */
@@ -25,6 +24,12 @@ export namespace Mat2 {
         m21: 0, m22: 1,
     }
 
+    /**
+     * Determines if a value implements the {@link Matrix2} interface.
+     * @param m The specified value.
+     * @returns Returns **True** if the value contains the `Matrix2` properties, 
+     * otherwise **False**.
+     */
     export function isMatrix2(m: any): m is Matrix2 {
         return typeof m === "object"
             && 'm11' in m && 'm12' in m

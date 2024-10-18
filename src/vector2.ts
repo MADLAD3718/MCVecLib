@@ -1,4 +1,4 @@
-import { Vector2 } from "@minecraft/server";
+import { Vector2, VectorXZ } from "@minecraft/server";
 import { Mat2 } from "./matrix2";
 
 /**
@@ -91,6 +91,30 @@ export namespace Vec2 {
             y: y ?? x
         };
         throw new Error("Invalid input values for vector construction.");
+    }
+
+    /**
+     * Constructs a {@link Vector2} from a {@link VectorXZ} value.
+     * @param v The specified vectorXZ value.
+     * @returns A {@link Vector2} with the Y component set to `v`'s z component.
+     */
+    export function fromVectorXZ(v: VectorXZ): Vector2 {
+        return {
+            x: v.x,
+            y: v.z
+        };
+    }
+
+    /**
+     * Converts a {@link Vector2} into a {@link VectorXZ}.
+     * @param v The specified vector.
+     * @returns A {@link VectorXZ} with the Z component set to `v`'s y component.
+     */
+    export function toVectorXZ(v: Vector2): VectorXZ {
+        return {
+            x: v.x,
+            z: v.y
+        };
     }
 
     /**

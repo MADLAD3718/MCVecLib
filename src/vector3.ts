@@ -1,4 +1,4 @@
-import { Direction, Vector2, Vector3 } from "@minecraft/server";
+import { Direction, RGB, Vector2, Vector3 } from "@minecraft/server";
 
 /**
  * Includes various 3D vector functions and values.
@@ -170,6 +170,32 @@ export namespace Vec3 {
         else if (max === a.y)
             return s.y >= 0 ? Direction.Up : Direction.Down;
         else return s.z >= 0 ? Direction.South : Direction.North;
+    }
+
+    /**
+     * Constructs a {@link Vector3} from the corresponding components in an {@link RGB} value.
+     * @param c The specified RGB value.
+     * @returns An {@link RGB} value with corresponding components to those in `v`.
+     */
+    export function fromRGB(c: RGB): Vector3 {
+        return {
+            x: c.red,
+            y: c.green,
+            z: c.blue
+        };
+    }
+
+    /**
+     * Converts a {@link Vector3} into an {@link RGB} value.
+     * @param v The specified vector.
+     * @returns An {@link RGB} value with corresponding components to those in `v`.
+     */
+    export function toRGB(v: Vector3): RGB {
+        return {
+            red: v.x,
+            green: v.y,
+            blue: v.z
+        };
     }
 
     /**

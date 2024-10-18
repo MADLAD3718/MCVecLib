@@ -28,6 +28,12 @@ export namespace Mat3 {
         m31: 0, m32: 0, m33: 1
     }
 
+    /**
+     * Determines if a value implements the {@link Matrix3} interface.
+     * @param m The specified value.
+     * @returns Returns **True** if the value contains the `Matrix3` properties, 
+     * otherwise **False**.
+     */
     export function isMatrix3(m: any): m is Matrix3 {
         return typeof m === "object"
             && 'm11' in m && 'm12' in m && 'm13' in m
@@ -260,6 +266,6 @@ export namespace Mat3 {
         const t = Math.abs(n.y) === 1 ? Vec3.East :
         Vec3.normalize(Vec3.from(n.z, 0, -n.x));
         const b = Vec3.cross(t, n);
-        return Mat3.from(t, n, b);
+        return from(t, n, b);
     }
 }
