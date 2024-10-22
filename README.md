@@ -1,4 +1,4 @@
-# MCVec3
+# MCVecLib
 A library of advanced matrix and vector operations for use within Minecraft Bedrock's scripting API. Most operations from the HLSL intrisics are implemented as well as some additional functions that are highly versatile, including conversions between the API's various interfaces.
 
 ## Namespaces:
@@ -11,8 +11,8 @@ A library of advanced matrix and vector operations for use within Minecraft Bedr
 ## Examples:
 Get the angle between the closest entity and the player's view direction:
 ```ts
+import { Vec3 } from "@madlad3718/mcveclib";
 import { Player } from "@minecraft/server";
-import { Vec3 } from "@madlad3718/mcvec3";
 
 function angleToClosestEntity(player: Player): number {
     // Get the closest entity to the player.
@@ -38,7 +38,7 @@ function angleToClosestEntity(player: Player): number {
 
 Get a random block within a 30° offset from a player's view direction:
 ```ts
-import { Mat3, RandVec } from "@madlad3718/mcvec3";
+import { Mat3, RandVec } from "@madlad3718/mcveclib";
 import { Player, Block } from "@minecraft/server";
 
 function randomVisibleBlock(player: Player): Block | undefined {
