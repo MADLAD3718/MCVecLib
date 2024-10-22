@@ -163,13 +163,12 @@ export namespace Vec3 {
      * @returns The nearest {@link Direction} to the vector.
      */
     export function toDirection(v: Vector3): Direction {
-        const a = abs(v), s = sign(v);
-        const max = Math.max(a.x, a.y, a.z);
+        const a = abs(v), max = Math.max(a.x, a.y, a.z);
         if (max === a.x)
-            return s.x >= 0 ? Direction.East : Direction.West;
+            return v.x >= 0 ? Direction.East : Direction.West;
         else if (max === a.y)
-            return s.y >= 0 ? Direction.Up : Direction.Down;
-        else return s.z >= 0 ? Direction.South : Direction.North;
+            return v.y >= 0 ? Direction.Up : Direction.Down;
+        else return v.z >= 0 ? Direction.South : Direction.North;
     }
 
     /**
