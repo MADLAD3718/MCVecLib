@@ -959,14 +959,14 @@ export namespace Vec3 {
      * Returns a refraction vector using an incident ray, a surface normal, and a refraction index.
      * @param i An incident direction vector.
      * @param n A surface normal vector.
-     * @param e The ratio of refractive indices between the incident medium and the refracting medium.
+     * @param eta The ratio of refractive indices between the incident medium and the refracting medium.
      * @returns A refraction vector.
      */
-    export function refract(i: Vector3, n: Vector3, e: number): Vector3 {
+    export function refract(i: Vector3, n: Vector3, eta: number): Vector3 {
         const cosi = -dot(i, n);
-        const sin2t = e * e * (1 - cosi * cosi);
+        const sin2t = eta * eta * (1 - cosi * cosi);
         const cost = Math.sqrt(1 - sin2t);
-        return add(mul(i, e), mul(n, e * cosi - cost));
+        return add(mul(i, eta), mul(n, eta * cosi - cost));
     }
 
     /**
