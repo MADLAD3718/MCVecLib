@@ -1,6 +1,6 @@
 {
   "name": "@madlad3718/mcveclib",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "A library of advanced matrix and vector operations for use within the Minecraft scripting API.",
   "main": "dist/index.js",
   "module": "dist/index.js",
