@@ -173,6 +173,88 @@ export namespace Vec2 {
     }
 
     /**
+     * Determines if any of the components of `v` are non-zero.
+     * @param v The specified vector.
+     * @returns Returns `true` if at least one of the components of `v` is non-zero, otherwise `false`.
+     */
+    export function any(v: Vector2): boolean {
+        return v.x !== 0 || v.y !== 0;
+    }
+
+    /**
+     * Determines if all of the components of `v` are non-zero.
+     * @param v The specified vector.
+     * @returns Returns `true` if all the components of `v` are non-zero, otherwise `false`.
+     */
+    export function all(v: Vector2): boolean {
+        return v.x !== 0 && v.y !== 0;
+    }
+
+    /**
+     * Determines if any of the components of `u` are greater than the corresponding
+     * components in `v`. 
+     * @param u The first vector.
+     * @param v The second vector.
+     * @returns A vector containing the component-wise results of the greater than comparison.
+     * 
+     * `1` is returned if the expression resulted true, and `0` if it resulted false.
+     */
+    export function greaterThan(u: Vector2, v: Vector2): Vector2 {
+        return {
+            x: u.x > v.x ? 1 : 0,
+            y: u.y > v.y ? 1 : 0
+        };
+    }
+
+    /**
+     * Determines if any of the components of `u` are less than the corresponding
+     * components in `v`. 
+     * @param u The first vector.
+     * @param v The second vector.
+     * @returns A vector containing the component-wise results of the less than comparison.
+     * 
+     * `1` is returned if the expression resulted true, and `0` if it resulted false.
+     */
+    export function lessThan(u: Vector2, v: Vector2): Vector2 {
+        return {
+            x: u.x < v.x ? 1 : 0,
+            y: u.y < v.y ? 1 : 0
+        };
+    }
+
+    /**
+     * Determines if any of the components of `u` are greater than or equal to the corresponding
+     * components in `v`. 
+     * @param u The first vector.
+     * @param v The second vector.
+     * @returns A vector containing the component-wise results of the greater than or equal to comparison.
+     * 
+     * `1` is returned if the expression resulted true, and `0` if it resulted false.
+     */
+    export function greaterEqual(u: Vector2, v: Vector2): Vector2 {
+        return {
+            x: u.x >= v.x ? 1 : 0,
+            y: u.y >= v.y ? 1 : 0
+        };
+    }
+
+    /**
+     * Determines if any of the components of `u` are less than or equal to the corresponding
+     * components in `v`. 
+     * @param u The first vector.
+     * @param v The second vector.
+     * @returns A vector containing the component-wise results of the less than or equal to comparison.
+     * 
+     * `1` is returned if the expression resulted true, and `0` if it resulted false.
+     */
+    export function lessEqual(u: Vector2, v: Vector2): Vector2 {
+        return {
+            x: u.x <= v.x ? 1 : 0,
+            y: u.y <= v.y ? 1 : 0
+        };
+    }
+
+    /**
      * Determines if two vectors are equal.
      * @param u The first specified vector.
      * @param v The second specified vector.
