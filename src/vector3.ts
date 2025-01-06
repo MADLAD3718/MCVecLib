@@ -1025,6 +1025,7 @@ export namespace Vec3 {
      * @param u The first value.
      * @param v The second value.
      * @returns The vector rejection of `u` from `v`.
+     * @remarks This function is equivalent to *u* - project(*u*, *v*).
      */
     export function reject(u: Vector3, v: Vector3): Vector3 {
         return sub(u, project(u, v));

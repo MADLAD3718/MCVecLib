@@ -141,7 +141,7 @@ export namespace Vec2 {
      * @returns A {@link Vector2} parsed from the string.
      */
     export function parse(s: string): Vector2 {
-        const [x, y] = s.split(" ").map(Number);
+        const [x, y] = s.split(' ').map(Number);
         return { x, y };
     }
 
@@ -795,6 +795,7 @@ export namespace Vec2 {
      * @param u The first value.
      * @param v The second value.
      * @returns The vector rejection of `u` from `v`.
+     * @remarks This function is equivalent to *u* - project(*u*, *v*).
      */
     export function reject(u: Vector2, v: Vector2): Vector2 {
         return sub(u, project(u, v));

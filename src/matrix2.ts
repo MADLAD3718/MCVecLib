@@ -116,7 +116,7 @@ export namespace Mat2 {
      */
     export function mul(m: Matrix2, v: Vector2): Vector2;
     /**
-     * Multiplies a matrix by another.
+     * Multiplies a matrix by another matrix.
      * @param m The multiplier matrix.
      * @param n The multiplicand matrix.
      */

@@ -152,7 +152,7 @@ export namespace Mat3 {
      */
     export function mul(m: Matrix3, v: Vector3): Vector3;
     /**
-     * Multiplies a matrix by another.
+     * Multiplies a matrix by another matrix.
      * @param m The multiplier matrix.
      * @param n The multiplicand matrix.
      */
