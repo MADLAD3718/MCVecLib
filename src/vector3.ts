@@ -1,4 +1,4 @@
-import { Direction, RGB, Vector2, Vector3 } from "@minecraft/server";
+import { Direction, RGB, Vector2, Vector3, VectorXZ } from "@minecraft/server";
 
 /**
  * Includes various 3D vector functions and values.
@@ -111,6 +111,31 @@ export namespace Vec3 {
             z: x[2]
         }
         throw new Error("Invalid input values for vector construction.");
+    }
+
+    /**
+     * Constructs a {@link Vector3} from a {@link VectorXZ} value.
+     * @param v The specified vectorXZ value.
+     * @returns A {@link Vector3} with the y component set to `0`.
+     */
+    export function fromVectorXZ(v: VectorXZ): Vector3 {
+        return {
+            x: v.x,
+            y: 0.0,
+            z: v.z
+        };
+    }
+
+    /**
+     * Converts a {@link Vector3} into a {@link VectorXZ}.
+     * @param v The specified vector.
+     * @returns A {@link VectorXZ}, omitting the y component of `v`.
+     */
+    export function toVectorXZ(v: Vector3): VectorXZ {
+        return {
+            x: v.x,
+            z: v.z
+        };
     }
 
     /**
