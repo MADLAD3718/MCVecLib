@@ -63,7 +63,7 @@ export namespace Mat3 {
             m21: u.y, m22: v.y, m23: w.y,
             m31: u.z, m32: v.z, m33: w.z
         };
-        throw new Error("Invalid input values for vector construction.");
+        throw new Error("Invalid input values for matrix construction.");
     }
 
     /**
@@ -265,7 +265,7 @@ export namespace Mat3 {
     export function buildTNB(n: Vector3): Matrix3 {
         const t = Math.abs(n.y) === 1 ? Vec3.East :
         Vec3.normalize(Vec3.from(n.z, 0, -n.x));
-        const b = Vec3.cross(t, n);
+        const b = Vec3.cross(n, t);
         return from(t, n, b);
     }
 }

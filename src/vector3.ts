@@ -1046,7 +1046,7 @@ export namespace Vec3 {
     }
 
     /**
-     * Gets the rejection a vector `u` from a vector `v`.
+     * Gets the rejection of a vector `u` from a vector `v`.
      * @param u The first value.
      * @param v The second value.
      * @returns The vector rejection of `u` from `v`.

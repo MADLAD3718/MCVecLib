@@ -55,7 +55,7 @@ export namespace Mat2 {
             m11: u.x, m12: v.x,
             m21: u.y, m22: v.y
         };
-        throw new Error("Invalid input values for vector construction.");
+        throw new Error("Invalid input values for matrix construction.");
     }
 
     /**
